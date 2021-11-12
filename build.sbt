@@ -42,7 +42,7 @@ test in Test := {
   val allDependencies = Attributed.data((dependencyClasspath in Compile).value ++ (dependencyClasspath in Test).value)
   val netLogoTestsJar = allDependencies.find(j => (j.getName.contains("netlogo") || j.getName.contains("NetLogo")) &&
     j.getName.contains("test")).get
-  val classpath = (allDependencies :+ scalaInstance.value.libraryJar).map(_.getPath).mkString(":")
+  val classpath = (allDependencies :+ scalaInstance.value.libraryJars).map(_.getPath).mkString(":")
   val testProcess = Fork.java.fork(forkOptions, Seq(
     "-classpath", classpath,
     "-Djava.awt.headless=true",
